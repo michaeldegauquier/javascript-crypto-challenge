@@ -1,7 +1,9 @@
-export function decrypt(ciphertext, nonce) {
+module.exports = {
+    decrypt: function (ciphertext, nonce) {
+        return ""
+    },
 
-}
-
-export function setKey(key) {
-
+    setKey: function (key) {
+        return ""
+    }
 }

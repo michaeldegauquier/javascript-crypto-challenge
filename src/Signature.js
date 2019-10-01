@@ -1,8 +1,11 @@
-export function verifyingKey() {
+module.exports = {
+    verifyingKey: function () {
+        return ""
+    },
 
+    sign: function (msg) {
+        return ""
+    }
 }
 
-export function sign(msg) {
-
-}
 
