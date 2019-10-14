@@ -8,8 +8,8 @@ let key, serverPublicKey, serverPrivateKey
 let rx, tx
 
 module.exports = {
-    setClientPublicKey: async function (clientPublicKey) {
-        if (key != null) {
+    setClientPublicKey: function (clientPublicKey) {
+        if (key != null && key !== clientPublicKey) {
             throw "client public key already set"
         }
         else {
