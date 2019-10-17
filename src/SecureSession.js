@@ -1,8 +1,8 @@
 const nacl = require('libsodium-wrappers')
 
-beforeAll(async () => {
+async function init() {
     await nacl.ready
-})
+}
 
 let key, serverPublicKey, serverPrivateKey
 let rx, tx
