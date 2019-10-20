@@ -1,6 +1,6 @@
 const nacl = require('libsodium-wrappers')
 
-async function init() {
+async function ready() {
     await nacl.ready
 }
 
@@ -17,7 +17,7 @@ module.exports = {
     },
 
     serverPublicKey: async function () {
-        await init()
+        await ready()
         const keyPair = nacl.crypto_kx_keypair()
         serverPrivateKey = keyPair.privateKey
         serverPublicKey = keyPair.publicKey
@@ -34,12 +34,12 @@ module.exports = {
     },
 
     decrypt: async function (ciphertext, nonce) {
-        await init()
+        await ready()
         return nacl.crypto_secretbox_open_easy(ciphertext, nonce, rx)
     },
 
     encrypt: async function (msg) {
-        await init()
+        await ready()
         let nonce = nacl.randombytes_buf(nacl.crypto_secretbox_NONCEBYTES)
         let ciphertext = nacl.crypto_secretbox_easy(msg, nonce, tx)
         return {ciphertext, nonce}

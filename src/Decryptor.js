@@ -1,6 +1,6 @@
 const nacl = require('libsodium-wrappers')
 
-async function init() {
+async function ready() {
     await nacl.ready
 }
 
@@ -8,7 +8,7 @@ var cryptedKey
 
 module.exports = {
     decrypt: async function (ciphertext, nonce) {
-        await init()
+        await ready()
         var decryptedKey
 
         if (cryptedKey == null) {
