@@ -11,13 +11,13 @@ module.exports = {
     setClientPublicKey: function (clientPublicKey) {
         if (key != null && key !== clientPublicKey) {
             throw "client public key already set"
-        }
-        else {
+        } else {
             key = clientPublicKey
         }
     },
 
-    serverPublicKey: function () {
+    serverPublicKey: async function () {
+        await init()
         const keyPair = nacl.crypto_kx_keypair()
         serverPrivateKey = keyPair.privateKey
         serverPublicKey = keyPair.publicKey
@@ -34,10 +34,12 @@ module.exports = {
     },
 
     decrypt: async function (ciphertext, nonce) {
+        await init()
         return nacl.crypto_secretbox_open_easy(ciphertext, nonce, rx)
     },
 
     encrypt: async function (msg) {
+        await init()
         let nonce = nacl.randombytes_buf(nacl.crypto_secretbox_NONCEBYTES)
         let ciphertext = nacl.crypto_secretbox_easy(msg, nonce, tx)
         return {ciphertext, nonce}
